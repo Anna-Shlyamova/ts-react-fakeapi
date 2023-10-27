@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
-import ProductItem from './components/ProductItem';
-import getRequest from './data/products';
-import { Product, ProductList } from './data/requests';
-import { forEachChild } from 'typescript';
+import Header from './components/header';
+import { Routes, Route } from 'react-router-dom';
+import Main from './pages/Main';
+import About from './pages/About';
 function App() {
- const rt = async function(){
-    let productsL = await getRequest< ProductList>("https://fakestoreapi.com/products");
-};
-  return (
-    <div className="container mx-auto max-w-2xl pt-5">
-      <header className="App-header">
-      header
-      </header>
-      <div>{rt().map({item}: Product=> <ProductItem prod={item}/>)}</div>
-    </div>
+  return(
+    <React.Fragment>
+      <Header></Header>
+      <Routes>
+        <Route
+        path={'/main'}
+        element={<Main/>}
+        />
+        <Route
+        path={'/about'}
+        element={<About/>}
+        />
+        <Route
+        path={'*'}
+        element={<Main/>}
+        />
+      </Routes>
+    </React.Fragment>
   );
 }
 

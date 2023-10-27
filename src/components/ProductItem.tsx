@@ -6,6 +6,9 @@ interface productType {
 }
 export default function ProductItem({prod}: productType) {
     return (
-        <h1>{prod.title}</h1>
+        <div>
+            <h1>{prod.title}</h1>
+            <img src={prod.image}/>
+        </div>
     )
 }
