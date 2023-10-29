@@ -1,25 +1,21 @@
-import React from 'react';
-import Button from "./button";
+import React, {ComponentType} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 interface HocButtonProps{
     text: string;
     children: string;
+    onClick: () => void;
 }
 
-interface buttonProps{
-    onClick: ()=> void;
-    children: string;
-}
-
-const HOCButton = (Button: ({ onClick, children }: buttonProps) => JSX.Element) =>{
-    return({text, children}: HocButtonProps)=>{
+function HOCButton<T extends HocButtonProps>(Component: ComponentType<T>) {
+    return(hocProps: Omit<T, 'onClick'>)=>{
         //eslint-disable-next-line react-hooks/rules-of-hooks 
         const navigate = useNavigate();
         const onClick = ()=>{
-            navigate(text);
+            navigate(hocProps.text);
         }
-    return (<Button onClick={onClick}>{children}</Button>);
+    return (<Component {...(hocProps as T)} onClick={onClick}>{hocProps.children}</Component>);
     }
 }
+
 export default HOCButton;

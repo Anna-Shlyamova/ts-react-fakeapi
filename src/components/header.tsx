@@ -5,10 +5,11 @@ import Button from './button';
 
 const Header = () =>{
     const navigate = useNavigate();
+    const NavigateButton = HOCButton(Button);
     return(
         <header>
-            <Button onClick={() => navigate('/main')}>Главная</Button>
-            <Button onClick={() => navigate('/about')}>О нас</Button>
+            <NavigateButton  text={'/main'}>Главная</NavigateButton>
+            <NavigateButton text={'/about'}>О нас</NavigateButton>
         </header>
     );
 }
